@@ -102,6 +102,14 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
         return self._created_at.value
 
     @property
+    def suspended_at(self):
+        """
+        :type: datetime.datetime
+        """
+        self._completeIfNotSet(self._suspended_at)
+        return self._suspended_at.value
+
+    @property
     def disk_usage(self):
         """
         :type: integer
@@ -532,6 +540,7 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
         self._company = github.GithubObject.NotSet
         self._contributions = github.GithubObject.NotSet
         self._created_at = github.GithubObject.NotSet
+        self._suspended_at = github.GithubObject.NotSet
         self._disk_usage = github.GithubObject.NotSet
         self._email = github.GithubObject.NotSet
         self._events_url = github.GithubObject.NotSet
@@ -577,6 +586,8 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
             self._contributions = self._makeIntAttribute(attributes["contributions"])
         if "created_at" in attributes:  # pragma no branch
             self._created_at = self._makeDatetimeAttribute(attributes["created_at"])
+        if "suspended_at" in attributes:  # pragma no branch
+            self._suspended_at = self._makeDatetimeAttribute(attributes["suspended_at"])
         if "disk_usage" in attributes:  # pragma no branch
             self._disk_usage = self._makeIntAttribute(attributes["disk_usage"])
         if "email" in attributes:  # pragma no branch
